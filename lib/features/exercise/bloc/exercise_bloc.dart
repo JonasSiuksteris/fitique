@@ -18,28 +18,23 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       emit(ExerciseUpdated(_exercise));
     });
     on<UpdateExerciseType>((event, emit) {
-      _exercise.exerciseType = event.exerciseType;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(
+          _exercise.copyWith(exerciseType: event.exerciseType)));
     });
     on<UpdateName>((event, emit) {
-      _exercise.name = event.name;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(_exercise.copyWith(name: event.name)));
     });
     on<UpdateDescription>((event, emit) {
-      _exercise.description = event.description;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(_exercise.copyWith(description: event.description)));
     });
     on<UpdateDuration>((event, emit) {
-      _exercise.duration = event.duration;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(_exercise.copyWith(duration: event.duration)));
     });
     on<UpdateReps>((event, emit) {
-      _exercise.reps = event.reps;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(_exercise.copyWith(reps: event.reps)));
     });
     on<UpdateSets>((event, emit) {
-      _exercise.sets = event.sets;
-      emit(ExerciseUpdated(_exercise));
+      emit(ExerciseUpdated(_exercise.copyWith(sets: event.sets)));
     });
   }
 }
