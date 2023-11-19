@@ -1,41 +1,64 @@
-import 'package:fitique/features/exercise/models/exercise.dart';
+part of 'exercise_bloc.dart';
 
-abstract class ExerciseEvent {}
+abstract class ExerciseEvent extends Equatable {
+  const ExerciseEvent();
 
-class InitialEvent extends ExerciseEvent {}
+  @override
+  List<Object> get props => [];
+}
+
+final class InitialEvent extends ExerciseEvent {}
 
 class UpdateName extends ExerciseEvent {
   final String name;
 
-  UpdateName(this.name);
+  const UpdateName(this.name);
+
+  @override
+  List<Object> get props => [name];
 }
 
-class UpdateDescription extends ExerciseEvent {
+final class UpdateDescription extends ExerciseEvent {
   final String description;
 
-  UpdateDescription(this.description);
+  const UpdateDescription(this.description);
+
+  @override
+  List<Object> get props => [description];
 }
 
-class UpdateDuration extends ExerciseEvent {
+final class UpdateDuration extends ExerciseEvent {
   final String duration;
 
-  UpdateDuration(this.duration);
+  const UpdateDuration(this.duration);
+
+  @override
+  List<Object> get props => [duration];
 }
 
-class UpdateReps extends ExerciseEvent {
+final class UpdateReps extends ExerciseEvent {
   final int reps;
 
-  UpdateReps(this.reps);
+  const UpdateReps(this.reps);
+
+  @override
+  List<Object> get props => [reps];
 }
 
-class UpdateSets extends ExerciseEvent {
+final class UpdateSets extends ExerciseEvent {
   final int sets;
 
-  UpdateSets(this.sets);
+  const UpdateSets(this.sets);
+
+  @override
+  List<Object> get props => [sets];
 }
 
-class UpdateExerciseType extends ExerciseEvent {
+final class UpdateExerciseType extends ExerciseEvent {
   final ExerciseType exerciseType;
 
-  UpdateExerciseType(this.exerciseType);
+  const UpdateExerciseType(this.exerciseType);
+
+  @override
+  List<Object> get props => [exerciseType];
 }

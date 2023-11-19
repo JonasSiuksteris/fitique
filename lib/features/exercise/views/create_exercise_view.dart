@@ -1,6 +1,4 @@
 import 'package:fitique/features/exercise/bloc/exercise_bloc.dart';
-import 'package:fitique/features/exercise/bloc/exercise_event.dart';
-import 'package:fitique/features/exercise/bloc/exercise_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/exercise.dart';

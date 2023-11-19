@@ -1,4 +1,4 @@
-import 'package:fitique/features/exercise/models/exercise.dart';
+part of 'exercise_bloc.dart';
 
 abstract class ExerciseState {}
 
