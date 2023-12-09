@@ -7,7 +7,7 @@ abstract class ExerciseEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class InitialEvent extends ExerciseEvent {}
+class InitialEvent extends ExerciseEvent {}
 
 class UpdateName extends ExerciseEvent {
   final String name;
@@ -18,7 +18,7 @@ class UpdateName extends ExerciseEvent {
   List<Object> get props => [name];
 }
 
-final class UpdateDescription extends ExerciseEvent {
+class UpdateDescription extends ExerciseEvent {
   final String description;
 
   const UpdateDescription(this.description);
@@ -27,7 +27,7 @@ final class UpdateDescription extends ExerciseEvent {
   List<Object> get props => [description];
 }
 
-final class UpdateDuration extends ExerciseEvent {
+class UpdateDuration extends ExerciseEvent {
   final String duration;
 
   const UpdateDuration(this.duration);
@@ -36,7 +36,7 @@ final class UpdateDuration extends ExerciseEvent {
   List<Object> get props => [duration];
 }
 
-final class UpdateReps extends ExerciseEvent {
+class UpdateReps extends ExerciseEvent {
   final int reps;
 
   const UpdateReps(this.reps);
@@ -45,7 +45,7 @@ final class UpdateReps extends ExerciseEvent {
   List<Object> get props => [reps];
 }
 
-final class UpdateSets extends ExerciseEvent {
+class UpdateSets extends ExerciseEvent {
   final int sets;
 
   const UpdateSets(this.sets);
@@ -54,7 +54,7 @@ final class UpdateSets extends ExerciseEvent {
   List<Object> get props => [sets];
 }
 
-final class UpdateExerciseType extends ExerciseEvent {
+class UpdateExerciseType extends ExerciseEvent {
   final ExerciseType exerciseType;
 
   const UpdateExerciseType(this.exerciseType);

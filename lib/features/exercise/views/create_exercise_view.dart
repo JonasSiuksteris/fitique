@@ -11,7 +11,11 @@ class CreateExerciseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ExerciseBloc(),
+      create: (context) {
+        final bloc = ExerciseBloc();
+        bloc.add(InitialEvent());
+        return bloc;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text(appBarTitle),
@@ -32,7 +36,7 @@ class CreateExerciseView extends StatelessWidget {
             children: <Widget>[
               buildNameField(context),
               buildExerciseTypeDropdown(context),
-              buildExerciseSpecificField(context),
+              buildExerciseSpecificField(context, state),
               buildDescriptionField(context),
               buildAddMediaButton(context),
               buildUploadedFileName(context),
@@ -84,25 +88,24 @@ class CreateExerciseView extends StatelessWidget {
   }
 }
 
-Widget buildExerciseSpecificField(BuildContext context) {
-  final bloc = BlocProvider.of<ExerciseBloc>(context);
-  return BlocBuilder<ExerciseBloc, ExerciseState>(
-    builder: (context, state) {
-      if (state is ExerciseUpdated) {
-        if (state.exercise.exerciseType == ExerciseType.Cardio) {
-          return buildDurationField(context, bloc, state.exercise);
-        } else {
-          return buildSetAndRepsField(context, bloc, state.exercise);
-        }
-      } else {
-        return Container(); // Or some default widget for initial state
-      }
-    },
-  );
+Widget buildExerciseSpecificField(BuildContext context, ExerciseState state) {
+  if (state is ExerciseUpdated) {
+    final exercise = state.exercise;
+    switch (exercise.exerciseType) {
+      case ExerciseType.cardio:
+        return buildDurationField(context, exercise);
+      case ExerciseType.strength:
+        return buildSetAndRepsField(context, exercise);
+      case ExerciseType.flexibility:
+        return buildSetAndRepsField(context, exercise);
+      // Add other cases as necessary
+    }
+  }
+  return Container(); // Default case
 }
 
-Widget buildDurationField(
-    BuildContext context, ExerciseBloc bloc, Exercise? exercise) {
+Widget buildDurationField(BuildContext context, ExerciseInformation? exercise) {
+  final bloc = BlocProvider.of<ExerciseBloc>(context);
   return TextFormField(
     initialValue: exercise?.duration.toString() ?? '',
     decoration: const InputDecoration(labelText: 'Duration (in minutes)'),
@@ -112,7 +115,8 @@ Widget buildDurationField(
 }
 
 Widget buildSetAndRepsField(
-    BuildContext context, ExerciseBloc bloc, Exercise? exercise) {
+    BuildContext context, ExerciseInformation? exercise) {
+  final bloc = BlocProvider.of<ExerciseBloc>(context);
   return Column(
     children: [
       TextFormField(

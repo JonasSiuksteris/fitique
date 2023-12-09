@@ -6,13 +6,14 @@ part 'exercise_state.dart';
 part 'exercise_event.dart';
 
 class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
-  final Exercise _exercise = Exercise(
+  final ExerciseInformation _exercise = const ExerciseInformation(
     name: '',
     description: '',
     duration: '',
     reps: 0,
     sets: 0,
-    exerciseType: ExerciseType.Cardio,
+    exerciseType: ExerciseType.cardio,
+    mediaType: ExerciseMediaType.text,
   );
 
   ExerciseBloc() : super(ExerciseInitial()) {
@@ -26,30 +27,53 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   }
 
   void _onUpdateSets(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(sets: event.sets)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(currentState.exercise.copyWith(sets: event.sets)));
+    }
   }
 
   void _onUpdateReps(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(reps: event.reps)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(currentState.exercise.copyWith(reps: event.reps)));
+    }
   }
 
   void _onUpdateDuration(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(duration: event.duration)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(
+          currentState.exercise.copyWith(duration: event.duration)));
+    }
   }
 
   void _onUpdateDescription(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(description: event.description)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(
+          currentState.exercise.copyWith(description: event.description)));
+    }
   }
 
   void _onUpdateName(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(name: event.name)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(currentState.exercise.copyWith(name: event.name)));
+    }
   }
 
   void _onUpdateExerciseType(event, emit) {
-    emit(ExerciseUpdated(_exercise.copyWith(exerciseType: event.exerciseType)));
+    if (state is ExerciseUpdated) {
+      final currentState = state as ExerciseUpdated;
+      emit(ExerciseUpdated(
+          currentState.exercise.copyWith(exerciseType: event.exerciseType)));
+    }
   }
 
   void _onInitialEvent(event, emit) {
-    emit(ExerciseUpdated(_exercise));
+    if (state is ExerciseInitial) {
+      emit(ExerciseUpdated(_exercise));
+    }
   }
 }

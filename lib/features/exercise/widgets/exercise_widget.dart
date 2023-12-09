@@ -2,7 +2,7 @@ import 'package:fitique/features/exercise/models/exercise.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseWidget extends StatelessWidget {
-  final Exercise exercise;
+  final ExerciseInformation exercise;
 
   const ExerciseWidget({super.key, required this.exercise});
 
